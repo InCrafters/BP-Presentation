@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solução de Centralização de Cadastros - Hospital Beneficência Portuguesa</title>
+    <style>
+        :root {
+            --primary-color: #005a9c;
+            --secondary-color: #00aba9;
+            --accent-color: #e31e24;
+            --text-color: #333333;
+            --light-bg: #f8f9fa;
+            --dark-bg: #2c3e50;
+            --white: #ffffff;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .slide:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .slide-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 30px;
+            position: relative;
+        }
+
+        .slide-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .slide-subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .slide-content {
+            padding: 30px;
+        }
+
+        .cover-slide .slide-header {
+            padding: 60px 30px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .cover-slide .slide-title {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .cover-slide .slide-subtitle {
+            font-size: 24px;
+        }
+
+        .two-column {
+            display: flex;
+            gap: 30px;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .highlight-box {
+            background-color: var(--light-gray);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .highlight-box h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .accent-text {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .primary-text {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .secondary-text {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table th, 
+        .comparison-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+
+        .comparison-table tr:hover {
+            background-color: rgba(0, 90, 156, 0.1);
+        }
+
+        .recommended {
+            background-color: rgba(0, 171, 169, 0.2);
+            font-weight: 600;
+        }
+
+        .phase-box {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .phase-title {
+            color: var(--primary-color);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .phase-title::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .conclusion-slide .slide-header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                flex-direction: column;
+            }
+            
+            .slide-title {
+                font-size: 24px;
+            }
+            
+            .cover-slide .slide-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Capa -->
+        <div class="slide cover-slide">
+            <div class="slide-header">
+                <h1 class="slide-title">Solução de Centralização de Cadastros de Usuários</h1>
+                <h2 class="slide-subtitle">Hospital Beneficência Portuguesa</h2>
+            </div>
+        </div>
+
+        <!-- Slide 2: Sumário Executivo -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Sumário Executivo</h2>
+            </div>
+            <div class="slide-content">
+                <div class="two-column">
+                    <div class="column">
+                        <p>O Hospital Beneficência Portuguesa enfrenta atualmente o desafio de gerenciar múltiplos cadastros de usuários em diferentes sistemas, resultando em redundância de dados, inconsistências e dificuldades na gestão de fotos dos usuários.</p>
+                        <p>Para solucionar este problema, apresentamos uma proposta de centralização de cadastros que visa simplificar a gestão, aumentar a eficiência operacional e garantir a consistência das informações em todos os sistemas utilizados pelo hospital.</p>
+                        <div class="highlight-box">
+                            <h3>Nossa Recomendação</h3>
+                            <p>Após análise detalhada, recomendamos a implementação do <span class="accent-text">Cenário 1: Sistema Base como Fonte Primária</span>, que oferece o melhor equilíbrio entre benefícios, custos e facilidade de implementação.</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h3 class="primary-text">Desafio</h3>
+                        <ul>
+                            <li>Gerenciamento de múltiplos cadastros em diferentes sistemas</li>
+                            <li>Redundância e inconsistências de dados</li>
+                            <li>Dificuldades na gestão de fotos dos usuários</li>
+                        </ul>
+                        
+                        <h3 class="primary-text">Solução</h3>
+                        <ul>
+                            <li>Centralização de cadastros para simplificar a gestão</li>
+                            <li>Garantia de consistência entre todos os sistemas</li>
+                            <li>Processo unificado para gestão de fotos</li>
+                        </ul>
+                        
+                        <h3 class="primary-text">Benefícios</h3>
+                        <ul>
+                            <li>Menor curva de aprendizado</li>
+                            <li>Aproveitamento de investimentos existentes</li>
+                            <li>Implementação mais rápida e menor impacto operacional</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Contextualização do Problema -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Contextualização do Problema</h2>
+            </div>
+            <div class="slide-content">
+                <div class="two-column">
+                    <div class="column">
+                        <h3 class="primary-text">Desafios Atuais</h3>
+                        <ul>
+                            <li><strong>Multiplicidade de Cadastros:</strong> Cada sistema (W-Access, MV, RH e outros) mantém seu próprio cadastro de usuários</li>
+                            <li><strong>Inconsistência de Dados:</strong> Informações divergentes entre sistemas para o mesmo usuário</li>
+                            <li><strong>Gestão Complexa de Fotos:</strong> Dificuldade em manter fotos atualizadas em todos os sistemas</li>
+                            <li><strong>Retrabalho Operacional:</strong> Necessidade de cadastrar o mesmo usuário múltiplas vezes</li>
+                            <li><strong>Experiência Fragmentada:</strong> Usuários precisam lidar com diferentes interfaces e processos</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3 class="primary-text">Impactos Operacionais</h3>
+                        <div class="highlight-box">
+                            <ul>
+                                <li>Aumento do tempo dedicado a tarefas administrativas</li>
+                                <li>Maior probabilidade de erros humanos no cadastro</li>
+                                <li>Dificuldades no controle de acesso físico e lógico</li>
+                                <li>Comprometimento da segurança da informação</li>
+                                <li>Experiência negativa para colaboradores e pacientes</li>
+                            </ul>
+                        </div>
+                        <p>A falta de centralização dos cadastros impacta diretamente na eficiência operacional do hospital, gerando custos adicionais, riscos de segurança e experiência negativa para todos os envolvidos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Cenário 1 (Recomendado) -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Cenário 1: Sistema Base como Fonte Primária (Recomendado)</h2>
+            </div>
+            <div class="slide-content">
+                <div class="diagram-container">
+                    <img src="imagens/diagrama_cenario1.png" alt="Diagrama do Cenário 1: Sistema Base como Fonte Primária">
+                </div>
+                <div class="two-column">
+                    <div class="column">
+                        <h3 class="primary-text">Descrição</h3>
+                        <p>Utilizar um sistema já existente no hospital como base para cadastro dos usuários. A aplicação identificará qualquer alteração no cadastro dos usuários nesse sistema base e replicará as alterações para os outros sistemas integrados.</p>
+                        
+                        <h3 class="primary-text">Componentes da Solução</h3>
+                        <ul>
+                            <li><strong>Sistema Base (existente):</strong> Responsável pelo cadastro primário dos usuários</li>
+                            <li><strong>Middleware de Integração:</strong> Detecta alterações e sincroniza com outros sistemas</li>
+                            <li><strong>Conectores Específicos:</strong> Adaptadores para cada sistema integrado</li>
+                            <li><strong>Repositório de Fotos:</strong> Centralização e gestão unificada de imagens</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3 class="primary-text">Fluxo de Funcionamento</h3>
+                        <ol>
+                            <li>Operadores cadastram/atualizam usuários no sistema base já conhecido</li>
+                            <li>Middleware detecta alterações no banco de dados central</li>
+                            <li>Alterações são propagadas para todos os sistemas integrados</li>
+                            <li>Fotos são gerenciadas de forma centralizada e distribuídas conforme necessário</li>
+                        </ol>
+                        
+                        <div class="highlight-box">
+                            <h3>Principais Vantagens</h3>
+                            <ul>
+                                <li>Curva de aprendizado reduzida: operadores já familiarizados com o sistema</li>
+                                <li>Aproveitamento de investimento existente</li>
+                                <li>Menor resistência à mudança</li>
+                                <li>Implementação mais rápida</li>
+                                <li>Menor risco operacional</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Cenário 2 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Cenário 2: Nova Aplicação Centralizada para Cadastros</h2>
+            </div>
+            <div class="slide-content">
+                <div class="diagram-container">
+                    <img src="imagens/diagrama_cenario2.png" alt="Diagrama do Cenário 2: Nova Aplicação Centralizada para Cadastros">
+                </div>
+                <div class="two-column">
+                    <div class="column">
+                        <h3 class="primary-text">Descrição</h3>
+                        <p>Desenvolvimento de uma aplicação dedicada onde todos os cadastros serão realizados, e então replicados para os demais sistemas do hospital.</p>
+                        
+                        <h3 class="primary-text">Componentes da Solução</h3>
+                        <ul>
+                            <li><strong>Interface de Cadastro Unificada:</strong> Nova aplicação para gestão centralizada</li>
+                            <li><strong>Banco de Dados Centralizado:</strong> Repositório único de informações</li>
+                            <li><strong>Conectores de Integração:</strong> Mecanismos de replicação para sistemas existentes</li>
+                            <li><strong>Repositório de Fotos:</strong> Gestão centralizada de imagens</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3 class="primary-text">Fluxo de Funcionamento</h3>
+                        <ol>
+                            <li>Operadores utilizam nova interface para cadastro/atualização de usuários</li>
+                            <li>Sistema centralizado armazena dados em repositório único</li>
+                            <li>Dados são replicados para todos os sistemas integrados</li>
+                            <li>Fotos são gerenciadas no repositório central e distribuídas</li>
+                        </ol>
+                        
+                        <div class="highlight-box">
+                            <h3>Considerações</h3>
+                            <ul>
+                                <li><span class="accent-text">Vantagens:</span> Solução sob medida, interface unificada, controle total</li>
+                                <li><span class="accent-text">Desvantagens:</span> Maior custo, tempo de implementação mais longo, necessidade de treinamento extensivo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Cenário 3 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Cenário 3: Aplicação como Serviço via API</h2>
+            </div>
+            <div class="slide-content">
+                <div class="diagram-container">
+                    <img src="imagens/diagrama_cenario3.png" alt="Diagrama do Cenário 3: Aplicação como Serviço via API">
+                </div>
+                <div class="two-column">
+                    <div class="column">
+                        <h3 class="primary-text">Descrição</h3>
+                        <p>Desenvolvimento de uma aplicação que será consumida via API, distribuindo os cadastros para todos os outros sistemas do hospital.</p>
+                        
+                        <h3 class="primary-text">Componentes da Solução</h3>
+                        <ul>
+                            <li><strong>API de Cadastro:</strong> Serviço central para gestão de usuários</li>
+                            <li><strong>Banco de Dados de Cadastros:</strong> Repositório central de informações</li>
+                            <li><strong>Clientes API:</strong> Adaptações nos sistemas existentes para consumo da API</li>
+                            <li><strong>Repositório de Fotos:</strong> Gestão centralizada de imagens</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3 class="primary-text">Fluxo de Funcionamento</h3>
+                        <ol>
+                            <li>Sistemas existentes consultam e atualizam dados via API</li>
+                            <li>API centraliza todas as operações de cadastro</li>
+                            <li>Dados são armazenados em repositório único</li>
+                            <li>Fotos são gerenciadas no repositório central e acessadas via API</li>
+                        </ol>
+                        
+                        <div class="highlight-box">
+                            <h3>Considerações</h3>
+                            <ul>
+                                <li><span class="accent-text">Vantagens:</span> Arquitetura moderna, flexibilidade de integração, escalabilidade</li>
+                                <li><span class="accent-text">Desvantagens:</span> Complexidade técnica, dependência de conectividade, segurança mais complexa</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Análise Comparativa -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Análise Comparativa dos Cenários</h2>
+            </div>
+            <div class="slide-content">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Critério</th>
+                            <th>Cenário 1 (Recomendado)</th>
+                            <th>Cenário 2</th>
+                            <th>Cenário 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tempo de implementação</td>
+                            <td class="recommended">Menor</td>
+                            <td>Maior</td>
+                            <td>Médio</td>
+                        </tr>
+                        <tr>
+                            <td>Custo</td>
+                            <td class="recommended">Menor</td>
+                            <td>Maior</td>
+                            <td>Médio</td>
+                        </tr>
+                        <tr>
+                            <td>Curva de aprendizado</td>
+                            <td class="recommended">Mínima</td>
+                            <td>Alta</td>
+                            <td>Média</td>
+                        </tr>
+                        <tr>
+                            <td>Flexibilidade técnica</td>
+                            <td>Média</td>
+                            <td>Alta</td>
+                            <td>Alta</td>
+                        </tr>
+                        <tr>
+                            <td>Risco operacional</td>
+                            <td class="recommended">Baixo</td>
+                            <td>Alto</td>
+                            <td>Médio</td>
+                        </tr>
+                        <tr>
+                            <td>Manutenção a longo prazo</td>
+                            <td>Média</td>
+                            <td>Média</td>
+                            <td>Alta</td>
+                        </tr>
+                        <tr>
+                            <td>Escalabilidade</td>
+                            <td>Média</td>
+                            <td>Alta</td>
+                            <td>Alta</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight-box">
+                    <h3>Conclusão da Análise</h3>
+                    <p>O <span class="accent-text">Cenário 1 (Sistema Base como Fonte Primária)</span> apresenta o melhor equilíbrio entre benefícios, custos e facilidade de implementação, com menor impacto operacional e aproveitamento dos investimentos já realizados pelo hospital.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Vantagens da Solução Recomendada -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Vantagens da Solução Recomendada</h2>
+            </div>
+            <div class="slide-content">
+                <div class="two-column">
+                    <div class="column">
+                        <h3 class="primary-text">Vantagens Estratégicas</h3>
+                        <ul>
+                            <li><strong>Aproveitamento de Investimentos:</strong> Utiliza sistemas e infraestrutura já existentes</li>
+                            <li><strong>Menor Impacto Operacional:</strong> Usuários continuam utilizando interfaces conhecidas</li>
+                            <li><strong>Implementação Mais Rápida:</strong> Menor tempo para disponibilização da solução</li>
+                            <li><strong>Menor Risco:</strong> Abordagem gradual com menor impacto nos processos existentes</li>
+                            <li><strong>Custo-Benefício Otimizado:</strong> Melhor relação entre investimento e resultados</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3 class="primary-text">Benefícios Esperados</h3>
+                        <ul>
+                            <li><strong>Consistência de Dados:</strong> Garantia de que todos os sistemas possuem as mesmas informações</li>
+                            <li><strong>Simplificação da Gestão de Fotos:</strong> Processo unificado para atualização de imagens</li>
+                            <li><strong>Redução de Retrabalho:</strong> Eliminação da necessidade de múltiplos cadastros</li>
+                            <li><strong>Aumento de Produtividade:</strong> Menos tempo dedicado a tarefas administrativas</li>
+                            <li><strong>Melhoria na Segurança:</strong> Controle centralizado de acessos e permissões</li>
+                        </ul>
+                        
+                        <div class="highlight-box">
+                            <h3>Retorno Esperado</h3>
+                            <p>Redução de até <span class="accent-text">70%</span> no tempo dedicado à gestão de cadastros e eliminação de inconsistências entre sistemas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Plano de Implementação -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Plano de Implementação</h2>
+            </div>
+            <div class="slide-content">
+                <div class="phase-box">
+                    <h3 class="phase-title">Fase 1: Preparação e Análise (4-6 semanas)</h3>
+                    <ul>
+                        <li>Mapeamento detalhado dos sistemas e interfaces</li>
+                        <li>Definição do sistema base a ser utilizado</li>
+                        <li>Análise de requisitos técnicos e funcionais</li>
+                        <li>Definição de arquitetura de integração</li>
+                    </ul>
+                </div>
+                
+                <div class="phase-box">
+                    <h3 class="phase-title">Fase 2: Desenvolvimento (8-12 semanas)</h3>
+                    <ul>
+                        <li>Implementação do middleware de integração</li>
+                        <li>Desenvolvimento dos conectores específicos</li>
+                        <li>Criação do repositório centralizado de fotos</li>
+                        <li>Testes unitários e de integração</li>
+                    </ul>
+                </div>
+                
+                <div class="phase-box">
+                    <h3 class="phase-title">Fase 3: Implantação (4-6 semanas)</h3>
+                    <ul>
+                        <li>Testes de aceitação com usuários-chave</li>
+                        <li>Migração e sincronização inicial de dados</li>
+                        <li>Treinamento de administradores e operadores</li>
+                        <li>Implantação gradual por departamentos</li>
+                    </ul>
+                </div>
+                
+                <div class="phase-box">
+                    <h3 class="phase-title">Fase 4: Monitoramento e Otimização (Contínuo)</h3>
+                    <ul>
+                        <li>Acompanhamento de métricas de desempenho</li>
+                        <li>Ajustes e otimizações conforme necessário</li>
+                        <li>Expansão para novos sistemas quando aplicável</li>
+                        <li>Suporte contínuo e manutenção evolutiva</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Desafios e Mitigações -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Desafios e Mitigações</h2>
+            </div>
+            <div class="slide-content">
+                <div class="two-column">
+                    <div class="column">
+                        <h3 class="primary-text">Desafios Técnicos</h3>
+                        <div class="highlight-box">
+                            <p><strong>Interfaces Heterogêneas:</strong> Cada sistema possui sua própria API ou método de integração</p>
+                            <p><strong>Mitigação:</strong> Desenvolvimento de conectores específicos para cada sistema, com tratamento adequado de particularidades</p>
+                        </div>
+                        
+                        <h3 class="primary-text">Desafios Operacionais</h3>
+                        <div class="highlight-box">
+                            <p><strong>Sincronização em Tempo Real:</strong> Garantir que alterações sejam propagadas rapidamente</p>
+                            <p><strong>Mitigação:</strong> Implementação de mecanismos de detecção de alterações e sincronização eficientes</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h3 class="primary-text">Desafios de Segurança</h3>
+                        <div class="highlight-box">
+                            <p><strong>Proteção de Dados Sensíveis:</strong> Garantir a segurança durante a transmissão e armazenamento</p>
+                            <p><strong>Mitigação:</strong> Implementação de criptografia, controle de acesso e auditoria em todas as camadas</p>
+                        </div>
+                        
+                        <h3 class="primary-text">Estratégia de Mitigação Geral</h3>
+                        <ul>
+                            <li>Abordagem gradual e controlada</li>
+                            <li>Testes extensivos antes de cada implantação</li>
+                            <li>Monitoramento contínuo durante e após a implementação</li>
+                            <li>Plano de contingência e rollback para cada fase</li>
+                            <li>Envolvimento dos usuários-chave em todas as etapas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Próximos Passos -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Próximos Passos</h2>
+            </div>
+            <div class="slide-content">
+                <div class="two-column">
+                    <div class="column">
+                        <div class="phase-box">
+                            <h3 class="phase-title">1. Workshop de Detalhamento</h3>
+                            <p>Sessão com equipes técnicas e operacionais para refinamento da solução</p>
+                            <ul>
+                                <li>Validação dos requisitos técnicos</li>
+                                <li>Definição de prioridades</li>
+                                <li>Identificação de stakeholders-chave</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="phase-box">
+                            <h3 class="phase-title">2. Prova de Conceito</h3>
+                            <p>Implementação piloto com escopo reduzido para validação técnica</p>
+                            <ul>
+                                <li>Validação da arquitetura proposta</li>
+                                <li>Teste de integração com sistemas prioritários</li>
+                                <li>Avaliação de desempenho e segurança</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="phase-box">
+                            <h3 class="phase-title">3. Planejamento Detalhado</h3>
+                            <p>Cronograma, recursos e marcos para implementação completa</p>
+                            <ul>
+                                <li>Definição de cronograma detalhado</li>
+                                <li>Alocação de recursos</li>
+                                <li>Estabelecimento de marcos e critérios de aceitação</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="phase-box">
+                            <h3 class="phase-title">4. Início do Projeto</h3>
+                            <p>Mobilização da equipe e início das atividades</p>
+                            <ul>
+                                <li>Formação da equipe do projeto</li>
+                                <li>Kick-off com stakeholders</li>
+                                <li>Início das atividades da Fase 1</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Conclusão -->
+        <div class="slide conclusion-slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Conclusão</h2>
+            </div>
+            <div class="slide-content">
+                <p>A centralização de cadastros de usuários representa uma oportunidade significativa para o Hospital Beneficência Portuguesa otimizar processos, reduzir custos operacionais e melhorar a experiência de colaboradores e pacientes.</p>
+                
+                <div class="highlight-box">
+                    <h3>Solução Recomendada</h3>
+                    <p>O <span class="accent-text">Cenário 1: Sistema Base como Fonte Primária</span> oferece o melhor equilíbrio entre benefícios, custos e facilidade de implementação, permitindo resultados rápidos com menor impacto operacional.</p>
+                </div>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <h3 class="primary-text">Benefícios Principais</h3>
+                        <ul>
+                            <li>Otimização de processos administrativos</li>
+                            <li>Redução de custos operacionais</li>
+                            <li>Melhoria na experiência de usuários</li>
+                            <li>Aumento na segurança da informação</li>
+                            <li>Consistência de dados em todos os sistemas</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3 class="primary-text">Diferenciais da Nossa Proposta</h3>
+                        <ul>
+                            <li>Abordagem pragmática e realista</li>
+                            <li>Aproveitamento dos investimentos existentes</li>
+                            <li>Menor curva de aprendizado para os usuários</li>
+                            <li>Implementação gradual e controlada</li>
+                            <li>Foco na gestão centralizada de fotos</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin-top: 30px; font-style: italic;">Estamos à disposição para esclarecer dúvidas e avançar com os próximos passos para a implementação desta solução transformadora.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Apresentação Técnico-Comercial | Hospital Beneficência Portuguesa | 2025</p>
+        </div>
+    </div>
+</body>
+</html>
